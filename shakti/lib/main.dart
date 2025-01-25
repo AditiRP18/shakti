@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'signup.dart';
 
-void main() {
+void main() async {
+  // Firebase initialization
   runApp(MyApp());
 }
 
@@ -24,8 +26,7 @@ class OnboardingScreen extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                    'lib/assets/homepage.jpg'), 
+                image: AssetImage('lib/assets/homepage.jpg'),
                 fit: BoxFit.cover,
                 colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.3),
@@ -82,37 +83,48 @@ class OnboardingScreen extends StatelessWidget {
                 SizedBox(height: 30),
 
                 // Get Started Button
-                Container(
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'Get Started',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.purple,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SignUpPage(), // Navigate to SignupPage
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            'Get Started',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.purple,
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.purple,
-                          borderRadius: BorderRadius.circular(30),
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Icon(Icons.arrow_forward, color: Colors.white),
                         ),
-                        child: Icon(Icons.arrow_forward, color: Colors.white),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -125,13 +137,13 @@ class OnboardingScreen extends StatelessWidget {
                   child: Text.rich(
                     TextSpan(
                       text: 'Already have an account? ',
-                      style: TextStyle(color: Colors.black12, fontSize: 16),
+                      style: TextStyle(color: Colors.white70, fontSize: 16),
                       children: [
                         TextSpan(
                           text: 'Login',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.black12,
+                            color: Colors.white,
                           ),
                         ),
                       ],
