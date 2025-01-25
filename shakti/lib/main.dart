@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'signup.dart';
+import 'login.dart'; // Import the LoginScreen file
 
 void main() async {
-  // Firebase initialization
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://kdlmpcljdfvzvbxpecbq.supabase.co', // Replace with your Supabase URL
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkbG1wY2xqZGZ2enZieHBlY2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc4MDUxMTAsImV4cCI6MjA1MzM4MTExMH0.p9YfrCeNwbhpGrGejysB3IMRCELk4LNibPsR54-mO2U', // Replace with your Anon Key
+  );
+
   runApp(MyApp());
 }
 
@@ -11,7 +20,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OnboardingScreen(),
+      initialRoute: '/onboarding',
+      routes: {
+        '/onboarding': (context) => OnboardingScreen(),
+        '/signup': (context) => SignupScreen(),
+        '/login': (context) => LoginPage(),
+      },
     );
   }
 }
@@ -85,13 +99,7 @@ class OnboardingScreen extends StatelessWidget {
                 // Get Started Button
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SignUpPage(), // Navigate to SignupPage
-                      ),
-                    );
+                    Navigator.pushNamed(context, '/signup');
                   },
                   child: Container(
                     width: double.infinity,
@@ -132,7 +140,7 @@ class OnboardingScreen extends StatelessWidget {
                 // Login Text
                 GestureDetector(
                   onTap: () {
-                    // Navigate to login screen
+                    Navigator.pushNamed(context, '/login');
                   },
                   child: Text.rich(
                     TextSpan(
